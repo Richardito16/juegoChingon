@@ -1,0 +1,88 @@
+[gd_scene load_steps=7 format=3 uid="uid://cqpefntuqi3b8"]
+
+[ext_resource type="Script" path="res://scripts/bullet.gd" id="1_jr6qa"]
+[ext_resource type="Texture2D" uid="uid://dq46sgn74q6g0" path="res://Sprites/bullet.png" id="2_7trv0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kwlh5"]
+radius = 3.30583
+
+[sub_resource type="Animation" id="Animation_xxp6j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+
+[sub_resource type="Animation" id="Animation_vueoa"]
+resource_name = "flish"
+length = 0.45
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [11, 12, 11, 10, 6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tdrf0"]
+_data = {
+"RESET": SubResource("Animation_xxp6j"),
+"flish": SubResource("Animation_vueoa")
+}
+
+[node name="bullet" type="Area2D"]
+scale = Vector2(1.28338, 1.28338)
+script = ExtResource("1_jr6qa")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_7trv0")
+hframes = 10
+region_enabled = true
+region_rect = Rect2(11, 134, 84, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kwlh5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_tdrf0")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
