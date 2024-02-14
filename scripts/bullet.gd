@@ -2,7 +2,7 @@ extends Area2D
 
 
 
-var velocidad = 2
+var velocidad = 1
 var direccion = 1
 
 # Called when the node enters the scene tree for the first time.

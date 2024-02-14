@@ -29,11 +29,14 @@ func _physics_process(_delta):
 func _on_body_entered(body):
 	if body.is_in_group("enemigos"):
 		body._Hit(damage_enemigo1)  # Llama a la función "dead" del cuerpo enemigo si está en el grupo "enemigos"
-	
+		queue_free()
 	elif body.is_in_group("enemigos2"):
 		body._Hit(damage_enemigo2)
+		queue_free()
 	
 	elif body.is_in_group("enemigos3"):
 		body._Hit(damage_enemigo3)
+		queue_free()
+	
 	elif body.is_in_group("terrenos"):
 		queue_free()
