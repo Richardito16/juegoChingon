@@ -86,7 +86,7 @@ func dead():
 	$AnimationPlayer.play("dead_E_3")  # Inicia la animación de muerte
 	await $AnimationPlayer.animation_finished  # Espera hasta que la animación de muerte termine
 	queue_free()  # Libera el nodo del enemigo
-
+	get_parent().vida()
 
 
 
